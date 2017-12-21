@@ -14,6 +14,13 @@
 * streams.home is an array of all tweets from all the users you're following.
 * streams.users is an object with properties for each user. streams.users.shawndrost has all of shawndrost's tweets.
 
+Sample: 
+- streams = 
+
+{ home : [{message: 'my tweet', user: 'zaid', created_at: Date()}. {message: 'another tweet', user: 'jon', created_at: Date()}]
+  users : {zaid: [ {tweetObj}.{tweetObj},{tweetObj} ] , Jon: [ {tweetObj} ], Sammy: [ {tweetObj} ] }
+}
+
 * Outline *
 
 1) Create a 'feed/timeline' of tweets
@@ -38,26 +45,70 @@ $(document).ready(twittler); //load in jQuery once document has been downloaded
 
 function twittler(){
 
+  var homeFeed = [];
 
-	var homeFeed = [];
+  function createFeed(tweets){
+   // Parses through passed in array of Tweet Objects and stores them in homeFeed
+   // updates homeFeed to include list of tweets to display
 
-	function createFeed(tweets){
-	 // Parses through passed in array of Tweet Objects and Displays Tweets on screen
-	 // updates homeFeed to include list of tweets to display
+    homeFeed = tweets.slice();
 
-	}
+  }
 
-	function clearFeed(){
-	//resets value of homeFeed
-	  homeFeed = [];
+  function clearFeed(){
+  //resets value of homeFeed
+    
+    $('div').remove();
 
-	}
+  }
 
-	function displayFeed(){
-    //use jQuery to add 1) User Name 2) Tweet 3) Time Stamp to page elements and display .text() for each
-    //temporarily use console.log to display/test
+  function orderFeed(){
+  //orders feed chronologically 
+  
+    homeFeed.sort(function(a, b) {
+      return b.created_at - a.created_at;
+    });
 
-	}
+  }
+
+  function addTweetToDOM(tweet){
+      
+      var $tweet = $('<div></div>').text(tweet.message);
+
+		  var userName = tweet.user;
+		  var $userName = $('<a class=\'user\'>').text('@'+userName+':');
+
+		  var date = tweet.created_at.toLocaleString();
+		  var $date = $('<em class=\'date\'>').text(date);
+
+		  $tweet.appendTo($body);
+		  $userName.prependTo($tweet);
+		  $date.appendTo($tweet);
+
+  }
+
+  function displayFeed(){
+  //use jQuery to display 1) User Name 2) Tweet 3) Time Stamp to page elements and display .text() for each
+  //temporarily use console.log to display/test
+    
+    clearFeed();	
+    orderFeed();
+		var index = streams.home.length - 1;
+
+		while(index >= 0){
+		  addTweetToDOM(streams.home[index]);
+		  index -= 1;
+		}
+
+  }
+
+  var $body = $('body');
+  $body.html('');
+
+  createFeed(streams.home);
+  displayFeed();
+  setInterval(displayFeed,1500);
+  
 
 
 
