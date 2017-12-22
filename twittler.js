@@ -81,7 +81,7 @@ function twittler(){
 		  var date = tweet.created_at.toLocaleString();
 		  var $date = $('<em class=\'date\'>').text(date);
 
-		  $tweet.appendTo($body);
+		  $tweet.appendTo($body.find('.tweet-feed'));
 		  $userName.prependTo($tweet);
 		  $date.appendTo($tweet);
 
@@ -137,7 +137,7 @@ function twittler(){
 
   var $body = $('body');
   var clickedUser = '';
-  $body.html('');
+  //$body.html('');
  
 
   createFeed(streams.home);
