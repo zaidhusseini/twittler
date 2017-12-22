@@ -45,41 +45,36 @@ $(document).ready(twittler); //load in jQuery once document has been downloaded
 
 function twittler(){
 
-  var homeFeed = [];
-
   function createFeed(tweets){
    // Parses through passed in array of Tweet Objects and stores them in homeFeed
    // updates homeFeed to include list of tweets to display
-
     homeFeed = tweets.slice();
-
+    clearFeed();	
+    orderFeed();
   }
 
   function clearFeed(){
   //resets value of homeFeed
-    
     $('div').remove();
-
   }
 
   function orderFeed(){
   //orders feed chronologically 
-  
     homeFeed.sort(function(a, b) {
       return b.created_at - a.created_at;
     });
-
   }
+
 
   function addTweetToDOM(tweet){
       
-      var $tweet = $('<div></div>').text(tweet.message);
+      var $tweet = $('<div></div>').text(tweet.message+' ').addClass('tweet');
 
 		  var userName = tweet.user;
-		  var $userName = $('<a class=\'user\'>').text('@'+userName+':').attr('data-username',userName);
+		  var $userName = $('<a href="#" class=\'user\'>').text('@'+userName+': ').attr('data-username',userName);
 
 		  var date = tweet.created_at.toLocaleString();
-		  var $date = $('<em class=\'date\'>').text(date);
+		  var $date = $('<em class=\'date\'>').text('('+date+')');
 
 		  $tweet.appendTo($body.find('.tweet-feed'));
 		  $userName.prependTo($tweet);
@@ -90,9 +85,7 @@ function twittler(){
   function displayHomeFeed(){
   //use jQuery to display 1) User Name 2) Tweet 3) Time Stamp to page elements and display .text() for each
   //temporarily use console.log to display/test
-    
-    clearFeed();	
-    orderFeed();
+    createFeed(streams.home);
 		var index = streams.home.length - 1;
 
 		while(index >= 0){
@@ -100,14 +93,14 @@ function twittler(){
 		  index -= 1;
 		}
 
-	  $('.user').on('click', function(){
-	      clickedUser = $(this).data('username');
-	      clearInterval(homeIntervalID);
-	      clearFeed();
-	      displayUserFeed();
-	      userIntervalID = setInterval(displayUserFeed,150);
-		});
-    
+    $('.user').on('click', function(){
+    	clearInterval(homeIntervalID);
+      clickedUser = $(this).data('username');
+	    $('body').find('.user-header').text('@'+clickedUser+' Feed');
+	    displayUserFeed();
+      userIntervalID = setInterval(displayUserFeed,150);
+    });
+
 
   }
 
@@ -115,39 +108,33 @@ function twittler(){
   //use jQuery to display 1) User Name 2) Tweet 3) Time Stamp to page elements and display .text() for each
   //temporarily use console.log to display/test
     
-    createFeed(streams.users[clickedUser]);
-    clearFeed();
-    orderFeed();
+    createFeed(streams.users[clickedUser]);	
 		var index = streams.users[clickedUser].length - 1;
 
 		while(index >= 0){
 		  addTweetToDOM(streams.users[clickedUser][index]);
 		  index -= 1;
 		}
-
-
-	  $('.user').on('click', function(){
-	      var clickedUser = $(this).data('username');
-	      clearInterval(homeIntervalID);
-	      clearFeed();
-		});
     
   }
 
 
+  var homeFeed = [];
   var $body = $('body');
   var clickedUser = '';
-  //$body.html('');
  
 
-  createFeed(streams.home);
   displayHomeFeed();
   var homeIntervalID = setInterval(displayHomeFeed,1500);
-  var userIntervalID = homeIntervalID;
-  
+  var userIntervalID;
 
-
-
+	 $('.logo').on('click', function(){
+	      clearInterval(userIntervalID);
+	      clearInterval(homeIntervalID);
+	      $('body').find('.user-header').text("Home Feed");
+	      displayHomeFeed();
+	      homeIntervalID = setInterval(displayHomeFeed,1500);
+		});
 }
 
 
