@@ -109,22 +109,16 @@ cite {
           box-sizing: border-box;
 }
 
-.grid,
 .container {
-	width: 960px;
+	width: 1040px;
   margin: 10px auto; 
 }
 
 .container {
-  float: left;
+  float: center;
 	padding-left: 80px;
-	padding-right: 30px;
+	padding-right: 80px;
 
-}
-
-.grid {
-	padding-right: 15px;
-	padding-left: 15px;
 }
 
 
@@ -134,6 +128,7 @@ cite {
   ========================================
 */
 
+
 .user {
   color: #FFBF0A;
   font-size: 22px;
@@ -141,13 +136,22 @@ cite {
 
 }
 
-.date {
-
-  color: #D6DEDC;
-	font-weight: 400;
-	font-style: italic;
-
+.tweet {
+  font-size: 22px;
+  margin: 10px 0px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #dfe2e5;
+  width: auto;
 }
+
+.date {
+  color: #fff;
+	font-weight: 400;
+	font-size: 14px;
+	float:right;
+}
+
 
 a:hover {
   color: #a9b2b9;
@@ -169,31 +173,45 @@ p a{
 */
 
 .logo a, .user-header {
-	font-weight: 100;
+	font-weight: 200;
 	color: #C07BFF;
 	padding: 40px 0 2px 0;
+}
+
+.logo{
+	text-align:center;
+	float:center;
+	padding-top: 15px
 
 }
 
 .logo a {
-	font-size: 150%;
+	font-size: 220%;
 	border-bottom: 1px solid #C07BFF;
 }
 
 .user-header {
-  font-size: 100%;
-  
-}
+  font-size: 120%;
 
+}
 
 .logo a:hover {
   color: #DEACFF;
   border-bottom: 1px solid #DEACFF;
 }
-
+	
 .primary-header {
-	padding-bottom: 20px;
-	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-top: 50px;
+	margin-top: 0;
+	height: 200px;
+	width: auto;
+	vertical-align: middle;
+	background: #cbe2c1;
+  background: -webkit-linear-gradient(to right, #a1d3b0, #f6f1d3);
+  background: -moz-linear-gradient(to right, #a1d3b0, #f6f1d3);
+  background: linear-gradient(to right, #a1d3b0, #f6f1d3);
+  padding: 44px 0 22px 0;
 }
 
 
