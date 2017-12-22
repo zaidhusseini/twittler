@@ -98,7 +98,7 @@ function twittler(){
       clickedUser = $(this).data('username');
 	    $('body').find('.user-header').text('@'+clickedUser+' Feed');
 	    displayUserFeed();
-      userIntervalID = setInterval(displayUserFeed,150);
+      userIntervalID = setInterval(displayUserFeed,100);
     });
 
 
