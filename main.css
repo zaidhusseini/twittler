@@ -116,7 +116,8 @@ cite {
 }
 
 .container {
-	padding-left: 30px;
+  float: left;
+	padding-left: 80px;
 	padding-right: 30px;
 
 }
@@ -167,21 +168,34 @@ p a{
   ==========================================================================
 */
 
-.logo a {
+.logo a, .user-header {
 	font-weight: 100;
-	font-size: 150%;
 	color: #C07BFF;
-	padding: 40px 0 22px 0;
+	padding: 40px 0 2px 0;
+
 }
+
+.logo a {
+	font-size: 150%;
+	border-bottom: 1px solid #C07BFF;
+}
+
+.user-header {
+  font-size: 100%;
+  
+}
+
 
 .logo a:hover {
   color: #DEACFF;
+  border-bottom: 1px solid #DEACFF;
 }
 
 .primary-header {
-	float:left;
-
+	padding-bottom: 20px;
+	padding-top: 10px;
 }
+
 
 
 /*
